@@ -46,6 +46,7 @@ public class Server {
             if (path.equals("/hello")) {
                 responseBody = "Hello from bare metal HTTP server";
                 statusCode = 200;
+
             } else if (path.equals("/time")) {
                 responseBody = new Date().toString();
                 statusCode = 200;
@@ -54,10 +55,10 @@ public class Server {
                 statusCode = 404;
             }
 
-            outputStream.write(("HTTP/1.1 " + statusCode + " OK\r\n" +
-                    "Content-Type: text/plain\r\n" +
-                    "Content-Length: " + responseBody.getBytes().length + "\r\n" +
-                    "\r\n" +
+            outputStream.write(("HTTP/1.1 " + statusCode + " OK\n" +
+                    "Content-Type: text/plain\n" +
+                    "Content-Length: " + responseBody.getBytes().length + "\n" +
+                    "\n" +
                     responseBody).getBytes(StandardCharsets.UTF_8));
             outputStream.flush();
             clientSocket.close();
